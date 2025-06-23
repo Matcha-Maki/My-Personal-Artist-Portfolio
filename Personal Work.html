@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>: Personal Work</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap');
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      min-height: 100vh;
+      min-width: 100vw;
+      overflow: hidden;
+      position: relative;
+    }
+    .background-iframe {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      z-index: 0;
+      filter: blur(8px) brightness(0.8);
+      pointer-events: none;
+    }
+    .password-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255,255,255,0.95);
+      padding: 2em 2.5em;
+      border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; /* Center vertically */
+      font-family: 'Nothing You Could Do', cursive;
+      min-width: 320px;
+      min-height: 200px;
+      text-align: center;      /* Center text and form elements */
+    }
+    .password-modal h2 {
+      margin-bottom: 1em;
+      color: #0f172a;
+      font-size: 1.3em;
+      letter-spacing: 1px;
+      font-family: 'Nothing You Could Do', cursive;
+    }
+    .password-modal input[type="password"],
+    .password-modal button {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .password-modal input[type="password"] {
+      padding: 0.6em 1em;
+      border: 1px solid #b3d8fd;
+      border-radius: 8px;
+      font-size: 1em;
+      margin-bottom: 1em;
+      outline: none;
+      width: 200px;
+      text-align: center;
+    }
+    .password-modal button {
+      padding: 0.5em 1.5em;
+      background: #58a5f3;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .password-modal button:hover {
+      background: #0f172a;
+    }
+    .error-message {
+      color: #d32f2f;
+      margin-top: 0.5em;
+      font-size: 0.95em;
+      min-height: 1.2em;
+      font-family: 'Poppins', 'Arial', sans-serif;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 16px;
+      background: #58a5f3;
+      border: none;
+      font-size: 2em;
+      color: #fff;
+      cursor: pointer;
+      z-index: 3;
+      line-height: 1;
+      padding: 0 0.5em;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .close-btn:hover {
+      background: #0f172a;
+    }
+    .password-modal,
+    .password-modal * {
+      font-family: 'Nothing You Could Do', cursive !important;
+    }
+    .error-message {
+      font-family: 'Poppins', 'Arial', sans-serif !important;
+    }
+  </style>
+</head>
+<body>
+  <iframe class="background-iframe" src="projects.html" tabindex="-1" aria-hidden="true"></iframe>
+  <div class="password-modal" id="passwordModal">
+    <button class="close-btn" onclick="closeModal()" aria-label="Close">&times;</button>
+    <h2>This section is password protected</h2>
+    <input type="password" id="passwordInput" placeholder="Enter password" autofocus>
+    <button onclick="checkPassword()">Enter</button>
+    <div class="error-message" id="errorMsg"></div>
+  </div>
+  <script>
+    function checkPassword() {
+      const input = document.getElementById('passwordInput').value;
+      const errorMsg = document.getElementById('errorMsg');
+      if (input === "APRIL7") {
+        document.getElementById('passwordModal').style.display = 'none';
+        document.querySelector('.background-iframe').style.display = 'none';
+        document.body.style.overflow = 'auto';
+      } else {
+        errorMsg.textContent = "Incorrect password. Please try again.";
+      }
+    }
+    function closeModal() {
+      // Redirect to projects.html (replace current page)
+      window.location.href = "projects.html";
+    }
+    // Allow Enter key to submit
+    document.getElementById('passwordInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') checkPassword();
+    });
+    // Prevent scrolling while modal is open
+    document.body.style.overflow = 'hidden';
+  </script>
+</body>
+</html>
